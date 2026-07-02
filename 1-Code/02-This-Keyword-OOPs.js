@@ -189,7 +189,7 @@ function simulateExpressRoute(callback){
   callback();
 }
 
-simulateExpressRoute(authController.verifyToken); // Verifying the token using undefined
+simulateExpressRoute(authController.verifyToken);
 authController.verifyToken();
 
 class AuthController {
@@ -220,7 +220,18 @@ controller.verifyToken1(); // logs properly
 controller.verifyToken3(); // logs properly
 controller.verifyToken2(); // undefined
 
-// Problem 2: 
+// Problem 2: Polyfilling bind() (Logic & Coding)
+// Write your own implementation of Function.prototype.bind. Create a function called myBind that takes a function and a context object, and returns a new function that will always execute with that context.
+
+Function.prototype.myBind = function(contsext, ...boundArgs){
+  // 1. 'this' points to the original function trying to be bound
+  const originalFunction = this;
+  // 2. Return a brand new function (forming a closure)
+  return function(...execArgs){
+    // 3 & 4. Combine the arguments and execute the original function
+    return originalFunction.apply(context, [...boundArgs, ...execArgs]);
+  }
+}
 
 /**
  * Problem 3: Prototypal Translation (Refactoring)
