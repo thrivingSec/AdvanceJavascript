@@ -8,7 +8,7 @@
  * to the global object. In node.js this is the global.
  * To set 'this' to undefined we have to use Strict Mode("use strict").
  * 
- * Implicit Binding: Whent the function is called as a method of an object (eg. db.connect()).
+ * Implicit Binding: When the function is called as a method of an object (eg. db.connect()).
  * In these cases 'this' refers to the Object before ".connect()".
  * 
  * Dynamic Binding and Lexial Binding: When a function is called inside a block or a fucntion then 
@@ -72,6 +72,7 @@ function greet(greeting, punctuation){
 
 greet.call(person, "Hello", "!")
 
+
 /**
  * The apply() method functions exactly like call() with one structural difference: it accepts arguments as a 
  * single array (or array-like object) rather than listing them one by one. It still executes the function 
@@ -112,8 +113,9 @@ dinaIntroduce("Japan");
  * Function.prototype: The shared warehouse containing call(), apply(), and bind().
  * myFunction: Your custom function object, which keeps a wireless "link" pointing back to that shared warehouse
  */
-function myFunction(){}
-
+function myFunction(name){
+  this.name = name
+}
 console.log(myFunction.hasOwnProperty("call")); // false
 console.log(myFunction.hasOwnProperty("bind")); // false
 console.log(myFunction.hasOwnProperty("apply")); // false
@@ -122,6 +124,7 @@ console.log(Function.prototype.hasOwnProperty("call")); // true
 console.log(Function.prototype.hasOwnProperty("bind")); // true
 console.log(Function.prototype.hasOwnProperty("apply")); // true
 
+console.log(myFunction.__proto__ === Function.prototype); // true
 console.log(myFunction.prototype === Function.prototype); // false
 console.log(Object.getPrototypeOf(myFunction) === Function.prototype); //true
 

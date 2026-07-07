@@ -13,7 +13,8 @@ function createRobot(name){
     }
   }
 }
-
+let robto1 = createRobot("R1");
+robto1.attack()
 /**
  * Problem:
  * It does work, but there is a massive, hidden problem here. Imagine our game gets super popular, and
@@ -87,7 +88,7 @@ robot2.attack(); // A1 fires the laser! Pew Pew!
 
 // How JavaScript(Engine) implements Prototype internally?
 /**
- * 1. Functions as Factories
+ * 1. Functions as Factories(Constructor Function)
  * 2. __proto__
  * 3. Inheritance
  * 4. Class
@@ -164,6 +165,7 @@ console.log(r2d2.prototype); // undefined
  */
 
 console.log(r2d2.__proto__ === RobotFactory.prototype); // true
+console.log(Object.getPrototypeOf(r2d2) === RobotFactory.prototype); // true
 
 /**
  * When you type r2d2.attack(), JavaScript says:
@@ -195,7 +197,8 @@ function FlyingRobotFactory(name){
 }
 
 FlyingRobotFactory.prototype = Object.create(RobotFactory.prototype);
-
+console.log(FlyingRobotFactory.prototype === RobotFactory.prototype);
+console.log(FlyingRobotFactory.prototype.__proto__ === RobotFactory.prototype);
 FlyingRobotFactory.prototype.fly = function(){
   console.log(this.name + " is flying! Wee Wee!");
 }
